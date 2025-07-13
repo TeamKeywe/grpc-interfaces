@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.didagent.grpc.server";
+option java_outer_classname = "AcapyServiceProto";
+
+package acapy;
+
+message VcIssueRequest {
+  string tenant_id = 1;
+  int64 pass_id = 2;
+  int64 member_id = 3;
+}
+
+message VcIssueResponse {
+  bool is_invitation_created = 1;
+}
+
+message VerifyCredentialRequest {
+  string tenant_id = 1;
+  int64 pass_id = 2;
+  string connection_id = 3;
+}
+
+message VerifyCredentialResponse {
+  bool is_verified = 1;
+}
+
+service AcapyService {
+  rpc IssueVc (VcIssueRequest) returns (VcIssueResponse);
+  rpc VerifyCredential (VerifyCredentialRequest) returns (VerifyCredentialResponse);
+}

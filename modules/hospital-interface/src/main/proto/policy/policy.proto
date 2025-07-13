@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.hospitalservice.domain.policy.grpc.server";
+option java_outer_classname = "BuildingServiceProto";
+
+package policy;
+
+message MaximumGuardianNumRequest {
+  string tenant_id = 1;
+}
+
+message MaximumGuardianNumResponse {
+  int64 maximum_guardian_num = 1;
+}
+
+service MaximumGuardianNumService {
+  rpc GetMaximumGuardianNumById (MaximumGuardianNumRequest) returns (MaximumGuardianNumResponse);
+}

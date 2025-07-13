@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.passservice.grpc.server";
+option java_outer_classname = "PassServiceProto";
+
+package pass;
+
+import "google/protobuf/timestamp.proto";
+
+message UpdateConnectionStatusRequest {
+  string tenant_id = 1;
+  int64 pass_id = 2;
+  string connection_id = 3;
+}
+
+message UpdateConnectionStatusResponse {
+  string tenant_id = 1;
+  int64 pass_id = 2;
+  int64 member_id = 3;
+  string connection_id = 4;
+  bool is_updated = 5;
+}
+
+message GetConnectionIdByPassIdRequest{
+  string tenant_id = 1;
+  int64 pass_id = 2;
+}
+
+message GetConnectionIdByPassIdResponse{
+  string connection_id = 1;
+}
+
+service PassService {
+  rpc UpdateConnectionState (UpdateConnectionStatusRequest) returns (UpdateConnectionStatusResponse);
+  rpc GetConnectionIdByPassId (GetConnectionIdByPassIdRequest) returns (GetConnectionIdByPassIdResponse);
+}
