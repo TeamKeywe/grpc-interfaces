@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.hospitalservice.domain.area.grpc.server";
+option java_outer_classname = "AreaServiceProto";
+
+package area;
+
+message AreaIdRequest {
+  int64 area_id = 1;
+}
+
+message AreaListRequest {}
+
+message AreaFullNameRequest {
+  string tenant_id = 1;
+  string area_code = 2;
+}
+
+message AreaResponse {
+  int64 area_id = 1;
+  string tenant_id = 2;
+  int64 building_id = 3;
+  string area_name = 4;
+  string area_code = 5;
+}
+
+message AreaListResponse {
+  repeated AreaResponse area = 1;
+}
+
+message AreaFullNameResponse {
+  string area_full_name = 1;
+}
+
+service AreaService {
+  rpc GetAreaById (AreaIdRequest) returns (AreaResponse);
+  rpc ListAreas (AreaListRequest) returns (AreaListResponse);
+  rpc GetAreaFullNameByCode (AreaFullNameRequest) returns (AreaFullNameResponse);
+}

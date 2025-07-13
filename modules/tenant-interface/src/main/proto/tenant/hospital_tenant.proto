@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.tenantservice.domain.tenant.grpc";
+option java_outer_classname = "HospitalTenantServiceProto";
+
+package tenant;
+
+service HospitalTenantService {
+  rpc GetTenantIdByHospitalId (HospitalIdToTenantIdRequest) returns (HospitalIdToTenantIdResponse);
+  rpc GetTokenByTenantId (GetTokensRequest) returns (GetTokenResponse);
+  rpc UpdateTokensByTenantId (UpdateTokensRequest) returns (UpdateTokensResponse);
+}
+
+message HospitalIdToTenantIdRequest {
+  int64 hospitalId = 1;
+}
+
+message HospitalIdToTenantIdResponse {
+  int64 hospitalId = 1;
+  string tenantId = 2;
+}
+
+message GetTokensRequest {
+  string tenantId = 1;
+}
+
+message GetTokenResponse {
+  string walletToken = 1;
+}
+
+message UpdateTokensRequest {
+  repeated TenantWalletToken tokens = 1;
+}
+
+message TenantWalletToken {
+  string tenantId = 1;
+  string walletToken = 2;
+}
+
+message UpdateTokensResponse {
+  string status = 1;
+}

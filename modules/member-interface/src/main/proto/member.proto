@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.memberservice.domain.member.grpc.server";
+option java_outer_classname = "MemberServiceProto";
+
+message MemberRequest {
+  int64 member_id = 1;
+}
+
+message MemberByNameAndRegNoRequest {
+  string member_name = 1;
+  string member_reg_no = 2;
+}
+
+message MemberResponse {
+  int64 member_id = 1;
+  string member_email = 2;
+  string member_name = 3;
+  string member_reg_no = 4;
+  string member_contact = 5;
+  string fcm_token = 6;
+}
+
+service MemberService {
+  rpc GetMember (MemberRequest) returns (MemberResponse);
+  rpc GetMemberByNameAndRegNo (MemberByNameAndRegNoRequest) returns (MemberResponse);
+}

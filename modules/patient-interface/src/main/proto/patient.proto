@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.patientservice.domain.patient.grpc.server";
+option java_outer_classname = "PatientServiceProto";
+
+package patient;
+
+enum Sex {
+  MALE = 0;
+  FEMALE = 1;
+}
+
+message PatientRequest {
+  int64 patient_id = 1;
+}
+
+message PatientByNameAndRegNoRequest {
+  string tenant_id = 1;
+  string patient_name = 2;
+  string patient_reg_no = 3;
+}
+
+message PatientByCode {
+  string tenant_id = 1;
+  string patient_code = 2;
+}
+
+message PatientListRequest {}
+
+message PatientResponse {
+  int64 patient_id = 1;
+  string tenant_id = 2;
+  string patient_code = 3;
+  string name = 4;
+  string reg_no = 5;
+  Sex sex = 6;
+  google.protobuf.Timestamp registered_on = 7;
+  repeated int64 areas = 8;
+}
+
+message PatientListResponse {
+  repeated PatientResponse patients = 1;
+}
+
+service PatientService {
+  rpc GetPatient (PatientRequest) returns (PatientResponse);
+  rpc GetPatientList (PatientListRequest) returns (PatientListResponse);
+  rpc GetPatientByNameAndRegNo (PatientByNameAndRegNoRequest) returns (PatientResponse);
+  rpc GetPatientByCode (PatientByCode) returns (PatientResponse);
+}

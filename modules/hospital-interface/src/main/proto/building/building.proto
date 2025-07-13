@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.hospitalservice.domain.building.grpc.server";
+option java_outer_classname = "BuildingServiceProto";
+
+package building;
+
+message BuildingRequest {
+  int64 building_id = 1;
+}
+
+message BuildingResponse {
+  int64 building_id = 1;
+  string tenant_id = 2;
+  string building_name = 3;
+  string building_code = 4;
+}
+
+service BuildingService {
+  rpc GetBuildingById (BuildingRequest) returns (BuildingResponse);
+}
