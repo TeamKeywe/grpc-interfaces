@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.doubleo.logservice.grpc.server";
+option java_outer_classname = "LogServiceProto";
+
+package log;
+
+service GuardianLogService {
+  rpc GetGuardianCountByPatient(PatientGuardianCountRequest) returns (GuardianCountResponse);
+}
+
+message PatientGuardianCountRequest {
+  string tenant_id = 1;
+  string patient_id = 2;
+}
+
+message GuardianCountResponse {
+  int32 count = 1;
+}
